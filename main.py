@@ -1,6 +1,7 @@
 import requests
 import argparse
 import json
+import os
 
 parser = argparse.ArgumentParser(description="Github User-Info")
 parser.add_argument("--username", type=str, required=True, help="GitHub username to fetch events")
@@ -50,7 +51,7 @@ def request_data(username):
         with open('response.json', "w") as r:
             json.dump(existing_data, r, indent=4)
 
-        json_parser(file="response.json")
+        json_parser(file="response.json")     
 
     except requests.exceptions.HTTPError as http_err:
         print(f"HTTP error occurred: {http_err}")
@@ -58,3 +59,5 @@ def request_data(username):
         print(f"An error occurred: {err}")
 
 request_data(username=username)
+
+os.remove("response.json")   
